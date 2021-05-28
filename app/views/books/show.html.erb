@@ -23,7 +23,11 @@
             <%= @book.user.name %>
             <% end %>
           </td>
-          <td><%= @book.title %></td>
+          <td>
+            <%= link_to book_path(@book) do %>
+            <%= @book.title %>
+            <% end %>
+          </td>
           <td><%= @book.body %></td>
           <% if current_user == @book.user %>
             <td>

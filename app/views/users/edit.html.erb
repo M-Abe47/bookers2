@@ -1,34 +1,40 @@
+<p id="notice"></p>
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2>User info</h2>
 
-      <% if @user.errors.any? %>
-        <%= @user.errors.count %>件のエラーが発生しました
+      <div id="error_explanation">
+        <% if @user.errors.any? %>
+          <h2>
+            <%= @user.errors.count %> errors prohibited this obj from being saved:
+          </h2>
           <% @user.errors.full_messages.each do |message| %>
-          <%= message %>
+          ・<%= message %><br>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+
 
       <%= form_with model:@user, local:true do |f| %>
 
-        <div>
+        <div class="form-group">
           <label for="inputName">Name</label>
-          <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
+          <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前", class:"form-control name" %>
         </div>
 
-        <div>
-          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-          <label for="inputImage">ProfileImage</label>
-          <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+        <div class="form-group">
+
+          <label for="inputImage">Image</label>
+          <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class:"form-control-file user_image" %>
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="intoduction">Introduction</label>
-          <%= f.text_area :introduction, rows:'2', class: "introduction" %>
+          <%= f.text_area :introduction, rows:'2', class: "form-control introduction" %>
         </div>
 
-        <div>
+        <div class="form-group">
           <%= f.submit "Update User",  class: "btn btn-secondary" %>
         </div>
 
